@@ -80,7 +80,7 @@ let currentWordIndex = 0;
 let wordsArray = [];
 let typedWords = 0;
 let startTime;
-let secondsElapsed = 0;
+let countdownTime = 60; // Durée du compte à rebours en secondes
 let maxWordsPerLine = 10; // Nombre de mots par ligne
 let maxWordsPerScreen = 20; // Nombre total de mots affichés à l'écran
 
@@ -107,21 +107,54 @@ function displayWords() {
 }
 
 // Fonction pour démarrer le chrono
-function startTimer() {
-    startTime = new Date();
-    setInterval(() => {
-        const now = new Date();
-        secondsElapsed = Math.floor((now - startTime) / 1000);
-        document.getElementById("timer").textContent = `Temps: ${secondsElapsed} secondes`;
 
-        // Calcul du WPM après 60 secondes
-        if (secondsElapsed >= 60) {
+function startTimer() {
+    const countdownInterval = setInterval(() => {
+        if (countdownTime <= 0) {
+            clearInterval(countdownInterval); // Arrêter le compte à rebours
             const wpm = typedWords;
             alert(`Temps écoulé ! Vous avez tapé à ${wpm} mots par minute.`);
             location.reload(); // Réinitialise la page après l'alerte
+            return;
         }
+
+        document.getElementById("timer").textContent = `Temps restant: ${countdownTime} secondes`;
+        countdownTime--; // Décrémenter le temps restant
     }, 1000);  // Mise à jour chaque seconde
 }
+
+// La fonction startTyping reste inchangée
+function startTyping() {
+    const inputField = document.getElementById("user_input");
+
+    inputField.addEventListener("keydown", (event) => {
+        const userText = inputField.value.trim();
+
+        if (event.key === " " && currentWordIndex < wordsArray.length) {
+            if (userText === wordsArray[currentWordIndex]) {
+                typedWords++;
+                document.getElementById(`word-${currentWordIndex}`).classList.add("correct");
+            } else {
+                document.getElementById(`word-${currentWordIndex}`).classList.add("incorrect");
+            }
+
+            inputField.value = "";
+            currentWordIndex++;
+
+            if (currentWordIndex % maxWordsPerLine === 7) {
+                wordsArray = wordsArray.concat(generateRandomWords(10));
+            }
+
+            displayWords();
+        }
+
+        if (!startTime) {
+            startTimer();  // Démarre le compte à rebours lors de la première saisie
+            startTime = new Date(); // Ajout de startTime pour la logique future si nécessaire
+        }
+    });
+}
+
 
 // Fonction pour démarrer la saisie
 function startTyping() {
