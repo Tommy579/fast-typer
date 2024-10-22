@@ -12,8 +12,23 @@ body {
 #words {
     margin: 20px 0;
     font-size: 1.5rem;
-    color: #555;
+    color: #bbb;
 }
+
+.correct {
+    color: green; /* Mot correct en vert */
+}
+
+.incorrect {
+    color: red; /* Mot incorrect en rouge */
+}
+
+.current-word {
+    color: black; /* Mot en cours de saisie en noir */
+    background-color: #959595;
+}
+
+
 
 #user_input {
     font-size: 1.2rem;
