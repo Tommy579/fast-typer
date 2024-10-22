@@ -79,10 +79,9 @@ const commonWords = [
 let currentWordIndex = 0;
 let wordsArray = [];
 let typedWords = 0;
-let startTime;
-let secondsElapsed = 0;
 let maxWordsPerLine = 10; // Nombre de mots par ligne
 let maxWordsPerScreen = 20; // Nombre total de mots affichés à l'écran
+let startTime = null; // Variable pour vérifier si le chrono a commencé
 
 // Fonction pour générer une phrase aléatoire avec des mots courants
 function generateRandomWords(count) {
@@ -94,11 +93,11 @@ function generateRandomWords(count) {
     return randomWords;
 }
 
-// Fonction pour afficher les mots à l'écran (groupe de 10)
+// Fonction pour afficher les lignes à l'écran
 function displayWords() {
     let wordsDisplay = '';
     for (let i = currentWordIndex; i < currentWordIndex + maxWordsPerScreen; i++) {
-        if (i === currentWordIndex + 7) { // Créer une nouvelle ligne après le 7ème mot
+        if ((i - currentWordIndex) % maxWordsPerLine === 0 && i > currentWordIndex) {
             wordsDisplay += '<br>';
         }
         wordsDisplay += `<span id="word-${i}">${wordsArray[i]} </span>`;
@@ -106,22 +105,28 @@ function displayWords() {
     document.getElementById("words").innerHTML = wordsDisplay;
 }
 
-// Fonction pour démarrer le chrono
-function startTimer() {
-    startTime = new Date();
-    setInterval(() => {
-        const now = new Date();
-        secondsElapsed = Math.floor((now - startTime) / 1000);
-        document.getElementById("timer").textContent = `Temps: ${secondsElapsed} secondes`;
 
-        // Calcul du WPM après 60 secondes
-        if (secondsElapsed >= 60) {
-            const wpm = typedWords;
-            alert(`Temps écoulé ! Vous avez tapé à ${wpm} mots par minute.`);
-            location.reload(); // Réinitialise la page après l'alerte
+function startCountdown() {
+    let countdownTime = 60; // Compte à rebours de 60 secondes
+    const countdownInterval = setInterval(() => {
+        countdownTime--;
+        document.getElementById("timer").textContent = `Temps restant: ${countdownTime} secondes`;
+
+        if (countdownTime <= 0) {
+            clearInterval(countdownInterval);
+            document.getElementById("user_input").disabled = true; // Désactiver l'entrée utilisateur après le temps écoulé
+
+            // Afficher le résultat final sous la zone de saisie
+            document.getElementById("wpm_number").textContent = typedWords;
+
+            // Rendre visible le message avec le résultat
+            document.getElementById("wpm_result").style.display = "block";
         }
     }, 1000);  // Mise à jour chaque seconde
 }
+
+
+
 
 // Fonction pour démarrer la saisie
 function startTyping() {
@@ -133,7 +138,7 @@ function startTyping() {
         // Si l'utilisateur tape un espace (fin du mot actuel)
         if (event.key === " " && currentWordIndex < wordsArray.length) {
             if (userText === wordsArray[currentWordIndex]) {
-                typedWords++;  // Compter uniquement si le mot est correct
+                typedWords++; // Compter uniquement si le mot est correct
                 document.getElementById(`word-${currentWordIndex}`).classList.add("correct");
             } else {
                 document.getElementById(`word-${currentWordIndex}`).classList.add("incorrect");
@@ -143,27 +148,27 @@ function startTyping() {
             inputField.value = "";
             currentWordIndex++;
 
-            // Si on a dépassé 7 mots, ajouter une nouvelle ligne de 10 mots
-            if (currentWordIndex % maxWordsPerLine === 7) {
-                // Générer 10 nouveaux mots et les ajouter au tableau
-                wordsArray = wordsArray.concat(generateRandomWords(10));
+            // Si la ligne complète est tapée, on fait défiler les mots
+            if (currentWordIndex % maxWordsPerLine === 0) {
+                // Ajouter une nouvelle ligne en dessous
+                wordsArray = wordsArray.concat(generateRandomWords(maxWordsPerLine));
+                displayWords(); // Rafraîchir l'affichage avec les nouvelles lignes
             }
-
-            // Rafraîchir l'affichage
-            displayWords();
         }
 
+        // Démarre le chrono lors de la première saisie
         if (!startTime) {
-            startTimer();  // Démarre le chrono lors de la première saisie
+            startTime = Date.now(); // Marquer le début de la saisie
+            startCountdown(); // Démarrer le compte à rebours
         }
     });
 }
 
 // Initialisation du jeu
 function initGame() {
-    wordsArray = generateRandomWords(maxWordsPerScreen);  // Générer les premiers mots
-    currentWordIndex = 0;  // Réinitialise l'index du mot courant
-    displayWords();  // Affiche les mots initiaux
+    wordsArray = generateRandomWords(maxWordsPerScreen); // Générer les premiers mots
+    currentWordIndex = 0; // Réinitialise l'index du mot courant
+    displayWords(); // Affiche les mots initiaux
 }
 
 initGame();

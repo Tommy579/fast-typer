@@ -29,4 +29,17 @@ body {
     color: #007bff;
 }
 
+#wpm_result {
+    font-size: 1.2rem; /* Police normale pour le texte */
+    color: #333;
+    display: none;
+}
+
+#wpm_number {
+    font-size: 2.5rem; /* Plus grande police pour le nombre */
+    color: #007bff; /* Couleur pour le nombre */
+    display: block; /* Force le nombre à être sur sa propre ligne */
+    margin-top: 10px; /* Espacement au-dessus du nombre */
+}
+
 
