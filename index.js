@@ -126,8 +126,6 @@ function startCountdown() {
 }
 
 
-
-
 // Fonction pour démarrer la saisie
 function startTyping() {
     const inputField = document.getElementById("user_input");
