@@ -123,7 +123,9 @@ function startTimer() {
     }, 1000);  // Mise à jour chaque seconde
 }
 
-// La fonction startTyping reste inchangée
+
+
+// Fonction pour démarrer la saisie
 function startTyping() {
     const inputField = document.getElementById("user_input");
 
@@ -141,7 +143,7 @@ function startTyping() {
             inputField.value = "";
             currentWordIndex++;
 
-            if (currentWordIndex % maxWordsPerLine === 7) {
+            if (currentWordIndex % maxWordsPerLine === 0) { // Correction ici pour ajouter des mots après 10 mots
                 wordsArray = wordsArray.concat(generateRandomWords(10));
             }
 
@@ -149,48 +151,11 @@ function startTyping() {
         }
 
         if (!startTime) {
-            startTimer();  // Démarre le compte à rebours lors de la première saisie
-            startTime = new Date(); // Ajout de startTime pour la logique future si nécessaire
+            startTimer();
         }
     });
 }
 
-
-// Fonction pour démarrer la saisie
-function startTyping() {
-    const inputField = document.getElementById("user_input");
-
-    inputField.addEventListener("keydown", (event) => {
-        const userText = inputField.value.trim();
-
-        // Si l'utilisateur tape un espace (fin du mot actuel)
-        if (event.key === " " && currentWordIndex < wordsArray.length) {
-            if (userText === wordsArray[currentWordIndex]) {
-                typedWords++;  // Compter uniquement si le mot est correct
-                document.getElementById(`word-${currentWordIndex}`).classList.add("correct");
-            } else {
-                document.getElementById(`word-${currentWordIndex}`).classList.add("incorrect");
-            }
-
-            // Réinitialiser l'input et passer au mot suivant
-            inputField.value = "";
-            currentWordIndex++;
-
-            // Si on a dépassé 7 mots, ajouter une nouvelle ligne de 10 mots
-            if (currentWordIndex % maxWordsPerLine === 7) {
-                // Générer 10 nouveaux mots et les ajouter au tableau
-                wordsArray = wordsArray.concat(generateRandomWords(10));
-            }
-
-            // Rafraîchir l'affichage
-            displayWords();
-        }
-
-        if (!startTime) {
-            startTimer();  // Démarre le chrono lors de la première saisie
-        }
-    });
-}
 
 // Initialisation du jeu
 function initGame() {
