@@ -1,7 +1,16 @@
+* {
+    font-family: Calibri, "sans-serif";
+}
+
 body {
-    font-family: Arial, sans-serif;
     text-align: center;
     padding: 20px;
+    display: flex;               /* Ajout du flexbox */
+    flex-direction: column;      /* Colonne pour empiler les éléments */
+    justify-content: center;     /* Centre verticalement */
+    align-items: center;         /* Centre horizontalement */
+    height: 100vh;              /* Prend toute la hauteur de la fenêtre */
+    margin-top: -40px;
 }
 
 #main_title {
@@ -25,10 +34,16 @@ body {
 
 .current-word {
     color: black; /* Mot en cours de saisie en noir */
-    background-color: #959595;
+    background-color: rgba(195, 195, 195, 0.66); /* Couleur de fond */
+    border-radius: 5px; /* Rayon des angles arrondis */
+    padding: 2px 5px; /* Espace autour du texte */
+    display: inline-block; /* Permet de respecter le padding */
 }
 
 
+#timer {
+    font-size: 20px;
+}
 
 #user_input {
     font-size: 1.2rem;

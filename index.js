@@ -72,7 +72,8 @@ function displayWords() {
             wordsDisplay += '<br>';
         }
         if (wordsArray[i]) {  // S'assurer que le mot existe
-            wordsDisplay += `<span id="word-${i}">${wordsArray[i]} </span>`;
+            wordsDisplay += `<span id="word-${i}">${wordsArray[i]}</span> `;
+
         }
     }
     document.getElementById("words").innerHTML = wordsDisplay;
@@ -106,7 +107,7 @@ function startTyping() {
         // Si le chrono n'a pas encore démarré, démarre-le à la première touche
         if (!startTime) {
             startTime = Date.now();
-            startCountdown()
+            startCountdown();
         }
 
         // Si l'utilisateur tape un espace
@@ -138,8 +139,14 @@ function startTyping() {
             // Si l'utilisateur tape une lettre, met à jour l'affichage
             currentInputWord += event.key; // Ajoute la lettre à la saisie en cours
             updateWordDisplay();
+        } else if (event.key === "Backspace") {
+            // Gérer la suppression (Backspace)
+            currentInputWord = currentInputWord.slice(0, -1); // Retire le dernier caractère
+            updateWordDisplay();
         }
     });
+
+
 }
 
 
@@ -153,10 +160,13 @@ function updateWordDisplay() {
         }
     }
 
-    // Ajouter la classe 'current-word' au mot actuel
+    // Ajouter la classe 'current-word' au mot actuel sans l'espace
     const currentWordElement = document.getElementById(`word-${currentWordIndex}`);
     if (currentWordElement) {
         currentWordElement.classList.add('current-word');
+
+        // Ajoute un espace juste après le mot en cours de saisie
+
     }
 }
 
