@@ -20,8 +20,14 @@
 <!-- Input pour capturer la saisie utilisateur -->
 <input type="text" id="user_input" placeholder="Commence à taper ici..." autofocus>
 
+<!-- Bouton pour recommencer le test -->
+<button id="restart_button", style="display:none", onclick="restartTest()">
+    <img src="images/restart.svg" alt="Icone Recommencer" style="width: 30px; height: 30px; vertical-align: middle;">
+</button>
+
+
 <!-- Zone pour afficher le chronomètre -->
-<p id="timer">Temps restant: 1 min</p>
+<p id="timer">Temps restant: 60 secondes</p>
 
 <!-- Zone pour afficher le résultat final avec le nombre en dessous -->
 <p id="wpm_result">Temps écoulé ! Votre mpm (mots par minute) est de <br>

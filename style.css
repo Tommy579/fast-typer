@@ -38,7 +38,34 @@ body {
     border-radius: 5px; /* Rayon des angles arrondis */
     padding: 2px 5px; /* Espace autour du texte */
     display: inline-block; /* Permet de respecter le padding */
+    transition: background-color 0.5s ease, transform 0.5s ease; /* Transition douce */
 }
+
+span {
+    transition: transform 0.5s ease; /* Ajout d'une transition pour le changement de position */
+}
+
+#restart_button {
+    display: none; /* On cache le bouton par défaut */
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #287ba7; /* Couleur verte */
+    color: white; /* Texte en blanc */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* Affiche une main pour le survol */
+    transition: background-color 0.3s ease; /* Transition douce pour l'effet de survol */
+}
+
+#restart_button:hover {
+    background-color: #216488; /* Couleur plus foncée au survol */
+}
+
+#restart_button:active {
+    background-color: #1e647e; /* Couleur encore plus foncée lors du clic */
+}
+
 
 
 #timer {

@@ -94,6 +94,8 @@ function startCountdown() {
 
             // Rendre visible le message avec le résultat
             document.getElementById("wpm_result").style.display = "block";
+
+            document.getElementById("restart_button").style.display = "block"; // Affiche le bouton pour recommencer
         }
     }, 1000);  // Mise à jour chaque seconde
 }
@@ -177,6 +179,30 @@ function initGame() {
     currentWordIndex = 0; // Réinitialise l'index du mot courant
     displayWords(); // Affiche les mots initiaux
 }
+
+function restartTest() {
+    // Réinitialise les variables
+    typedWords = 0;
+    currentWordIndex = 0;
+    currentInputWord = "";
+    startTime = null;
+    countdownStarted = false;
+
+    // Réinitialise le champ de saisie
+    document.getElementById("user_input").value = "";
+    document.getElementById("user_input").disabled = false;
+
+    // Cache le résultat précédent et le bouton de redémarrage
+    document.getElementById("wpm_result").style.display = "none";
+    document.getElementById("restart_button").style.display = "none";
+
+    // Réinitialise le chronomètre
+    document.getElementById("timer").textContent = "Temps restant: 60 secondes";
+
+    // Génère de nouveaux mots et les affiche
+    initGame();
+}
+
 
 initGame();
 startTyping();
