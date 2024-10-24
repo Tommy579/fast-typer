@@ -53,6 +53,11 @@ let maxWordsPerScreen = 20; // Nombre total de mots affichés à l'écran
 let startTime = null; // Variable pour vérifier si le chrono a commencé
 let currentInputWord = "";  // Mot en cours de saisie par l'utilisateur
 let countdownStarted = false; // Indicateur pour vérifier si le chrono a démarré
+let bestScore = localStorage.getItem("bestScore") || 0; // Récupère le meilleur score depuis le localStorage ou 0 si c'est la première fois
+
+// Affiche le meilleur score au démarrage du jeu
+document.getElementById("best_score").textContent = `Meilleur score : ${bestScore} MPM`;
+
 
 // Fonction pour générer une phrase aléatoire avec des mots courants
 function generateRandomWords(count) {
@@ -96,6 +101,16 @@ function startCountdown() {
             document.getElementById("wpm_result").style.display = "block";
 
             document.getElementById("restart_button").style.display = "block"; // Affiche le bouton pour recommencer
+
+            // Comparer et mettre à jour le meilleur score
+            if (typedWords > bestScore) {
+                bestScore = typedWords;  // Met à jour le meilleur score
+                localStorage.setItem("bestScore", bestScore);  // Sauvegarde dans le localStorage
+                document.getElementById("best_score").textContent = `Nouveau meilleur score : ${bestScore} MPM !`;  // Affiche le nouveau meilleur score
+            } else {
+                document.getElementById("best_score").textContent = `Meilleur score : ${bestScore} MPM`;
+            }
+
         }
     }, 1000);  // Mise à jour chaque seconde
 }

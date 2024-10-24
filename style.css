@@ -50,16 +50,15 @@ span {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 1.2rem;
-    background-color: #287ba7; /* Couleur verte */
-    color: white; /* Texte en blanc */
-    border: none;
+    background-color: rgba(255, 255, 255, 0); /* Couleur bleue */
+    border: 1px solid #287ba7;
     border-radius: 5px;
     cursor: pointer; /* Affiche une main pour le survol */
     transition: background-color 0.3s ease; /* Transition douce pour l'effet de survol */
 }
 
 #restart_button:hover {
-    background-color: #216488; /* Couleur plus foncée au survol */
+    background-color: #287ba7; /* Couleur plus foncée au survol */
 }
 
 #restart_button:active {
