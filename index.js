@@ -26,7 +26,7 @@ const commonWords = [
     "commencer", "face", "savoir", "courant", "histoire", "cause", "film", "arbre",
     "chambre", "malgré", "type", "projet", "accord", "pays", "conseil", "photo",
     "train", "nuit", "bras", "fermer", "forme", "livre", "public", "finir", "force",
-    "porte", "musique", "rapport", "fleur", "cœur", "lettre", "message", "avenir",
+    "porte", "musique", "rapport", "fleur", "coeur", "lettre", "message", "avenir",
     "bord", "vent", "mer", "ordre", "profession", "partie", "jeu", "scène", "milieu",
     "prix", "calme", "suite", "niveau", "étude", "proposer", "réponse", "confiance",
     "décision", "chance", "possible", "objet", "centre", "frère", "quartier", "mode",
