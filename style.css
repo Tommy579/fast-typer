@@ -13,87 +13,199 @@ body {
     margin-top: -40px;
 }
 
-#main_title {
-    color: #333;
-    font-size: 2.5rem;
-}
-
-#words {
-    margin: 20px 0;
-    font-size: 1.5rem;
-    color: #bbb;
-}
-
-.correct {
-    color: green; /* Mot correct en vert */
-}
-
-.incorrect {
-    color: red; /* Mot incorrect en rouge */
-}
-
-.current-word {
-    color: black; /* Mot en cours de saisie en noir */
-    background-color: rgba(195, 195, 195, 0.66); /* Couleur de fond */
-    border-radius: 5px; /* Rayon des angles arrondis */
-    padding: 2px 5px; /* Espace autour du texte */
-    display: inline-block; /* Permet de respecter le padding */
-    transition: background-color 0.5s ease, transform 0.5s ease; /* Transition douce */
-}
-
 span {
     transition: transform 0.5s ease; /* Ajout d'une transition pour le changement de position */
 }
 
-#restart_button {
-    display: none; /* On cache le bouton par défaut */
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    background-color: rgba(255, 255, 255, 0); /* Couleur bleue */
-    border: 1px solid #287ba7;
-    border-radius: 5px;
-    cursor: pointer; /* Affiche une main pour le survol */
-    transition: background-color 0.3s ease; /* Transition douce pour l'effet de survol */
+
+@media (prefers-color-scheme: light) {
+    #main_title {
+        color: #333;
+        font-size: 2.5rem;
+    }
+
+    #timer {
+        font-size: 20px;
+        color: #333;
+    }
+
+    #words {
+        margin: 20px 0;
+        font-size: 1.5rem;
+        color: #bbb;
+    }
+
+    .correct {
+        color: #009600; /* Mot correct en vert */
+    }
+
+    .incorrect {
+        color: #c80000; /* Mot incorrect en rouge */
+    }
+
+    .current-word {
+        color: #131313; /* Mot en cours de saisie en noir */
+        background-color: rgba(115, 115, 115, 0.66); /* Couleur de fond */
+        border-radius: 5px; /* Rayon des angles arrondis */
+        padding: 2px 5px; /* Espace autour du texte */
+        display: inline-block; /* Permet de respecter le padding */
+        transition: background-color 0.5s ease, transform 0.5s ease; /* Transition douce */
+    }
+
+    #user_input{
+        color: #131313;
+    }
+
+    #restart_button img{
+        background-color: transparent;
+    }
+
+    #restart_button {
+        display: none; /* On cache le bouton par défaut */
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border: 1px solid #287ba7;
+        border-radius: 5px;
+        cursor: pointer; /* Affiche une main pour le survol */
+        transition: background-color 0.3s ease; /* Transition douce pour l'effet de survol */
+    }
+
+    #restart_button:hover {
+        background-color: #287ba7; /* Couleur plus foncée au survol */
+    }
+
+    #restart_button:active {
+        background-color: #1e647e; /* Couleur encore plus foncée lors du clic */
+    }
+
+    #user_input {
+        font-size: 1.2rem;
+        padding: 10px;
+        width: 50%;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #wpm_result {
+        margin-top: 20px;
+        font-size: 1.3rem;
+        color: #007bff;
+    }
+
+    #wpm_result {
+        font-size: 1.2rem; /* Police normale pour le texte */
+        color: #333;
+        display: none;
+    }
+
+    #wpm_number {
+        font-size: 2.5rem; /* Plus grande police pour le nombre */
+        color: #007bff; /* Couleur pour le nombre */
+        display: block; /* Force le nombre à être sur sa propre ligne */
+        margin-top: 10px; /* Espacement au-dessus du nombre */
+    }
+
+    #best_score{
+        color: #a52f06;
+    }
 }
 
-#restart_button:hover {
-    background-color: #287ba7; /* Couleur plus foncée au survol */
+
+
+@media (prefers-color-scheme: dark) {
+    *{
+        background-color: #222;
+    }
+    #main_title {
+        color: #cbcbcb;
+        font-size: 2.5rem;
+    }
+
+    #timer {
+        font-size: 20px;
+        color: #cbcbcb;
+    }
+
+    #words {
+        margin: 20px 0;
+        font-size: 1.5rem;
+        color: #bbb;
+    }
+
+    .correct {
+        color: #006400; /* Mot correct en vert */
+    }
+
+    .incorrect {
+        color: #960000; /* Mot incorrect en rouge */
+    }
+
+    .current-word {
+        color: #bababa; /* Mot en cours de saisie en blanc */
+        background-color: rgba(81, 81, 81, 0.66); /* Couleur de fond */
+        border-radius: 5px; /* Rayon des angles arrondis */
+        padding: 2px 5px; /* Espace autour du texte */
+        display: inline-block; /* Permet de respecter le padding */
+        transition: background-color 0.5s ease, transform 0.5s ease; /* Transition douce */
+    }
+
+    #user_input{
+        color: #cbcbcb;
+    }
+
+    #restart_button img{
+        background-color: transparent;
+    }
+
+    #restart_button {
+        display: none; /* On cache le bouton par défaut */
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border: 1px solid #3c7c9c;
+        border-radius: 5px;
+        cursor: pointer; /* Affiche une main pour le survol */
+        transition: background-color 0.3s ease; /* Transition douce pour l'effet de survol */
+    }
+
+    #restart_button:hover {
+        background-color: #3c7c9c; /* Couleur plus foncée au survol */
+    }
+
+    #restart_button:active {
+        background-color: #24586e; /* Couleur encore plus foncée lors du clic */
+    }
+
+    #user_input {
+        font-size: 1.2rem;
+        padding: 10px;
+        width: 50%;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #wpm_result {
+        margin-top: 20px;
+        font-size: 1.3rem;
+        color: #2f88ff;
+    }
+
+    #wpm_result {
+        font-size: 1.2rem; /* Police normale pour le texte */
+        color: #cbcbcb;
+        display: none;
+    }
+
+    #wpm_number {
+        font-size: 2.5rem; /* Plus grande police pour le nombre */
+        color: #2f88ff; /* Couleur pour le nombre */
+        display: block; /* Force le nombre à être sur sa propre ligne */
+        margin-top: 10px; /* Espacement au-dessus du nombre */
+    }
+
+    #best_score{
+        color: #6c3a2a;
+    }
 }
 
-#restart_button:active {
-    background-color: #1e647e; /* Couleur encore plus foncée lors du clic */
-}
-
-
-
-#timer {
-    font-size: 20px;
-}
-
-#user_input {
-    font-size: 1.2rem;
-    padding: 10px;
-    width: 50%;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-}
-
-#wpm_result {
-    margin-top: 20px;
-    font-size: 1.3rem;
-    color: #007bff;
-}
-
-#wpm_result {
-    font-size: 1.2rem; /* Police normale pour le texte */
-    color: #333;
-    display: none;
-}
-
-#wpm_number {
-    font-size: 2.5rem; /* Plus grande police pour le nombre */
-    color: #007bff; /* Couleur pour le nombre */
-    display: block; /* Force le nombre à être sur sa propre ligne */
-    margin-top: 10px; /* Espacement au-dessus du nombre */
-}

@@ -133,11 +133,12 @@ function startTyping() {
 
             // Vérifie si le mot entier est correct
             if (currentInputWord.trim() === wordsArray[currentWordIndex]) {
-                document.getElementById(`word-${currentWordIndex}`).style.color = 'green'; // Mot correct en vert
-                typedWords++; // Compter uniquement si le mot est correct
+                document.getElementById(`word-${currentWordIndex}`).classList.add('correct'); // Ajoute la classe "correct" si le mot est correct
+                typedWords++;
             } else {
-                document.getElementById(`word-${currentWordIndex}`).style.color = 'red'; // Mot incorrect en rouge
+                document.getElementById(`word-${currentWordIndex}`).classList.add('incorrect'); // Ajoute la classe "incorrect" si le mot est incorrect
             }
+
 
             // Réinitialiser l'input et passer au mot suivant
             currentInputWord = ""; // Réinitialise l'input
